@@ -25,7 +25,7 @@ public class GameOfLife implements Board {
     // Run the simulation for a number of turns
     public void run(int turns) { //this one
         // call step the number of times requested
-
+        
     }
 
     // Step the simulation forward one turn.
@@ -41,7 +41,7 @@ public class GameOfLife implements Board {
         // use the get(x,y) method to read any board state you need.
         for (int i = y - 1; i < y + 3; i++) {
             for (int j = x - 1; j < x + 3; j++) {
-                if (x != j && y != i && board[i][j] /* has neighbor??? */) {
+                if (x != j && y != i && board[i][j] < 0) {
                     count++;
                 }
             }
