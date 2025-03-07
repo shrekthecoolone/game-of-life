@@ -24,24 +24,33 @@ public class GameOfLife implements Board {
 
     // Run the simulation for a number of turns
     public void run(int turns) { //this one
-        // call step the number of times requested
-        
+        for (int i = 0; i < turns + 1; i++) {
+            step(); 
+        }
     }
 
     // Step the simulation forward one turn.
     public void step() { //this one
-        int iCount = 1;
-        int jCount = 1;
-        for (int i = iCount - 1; i < board.length; i++) {
-            iCount++;
-            for (int j = jCount; j < board[0].length; j++) {
-                jCount++;
-                if (board[i][j] > 0) {
-                    
+        int [][] changed = board; 
+        for (int i = 0; i < changed.length; i++) {
+            for (int j = 0; j < changed[0].length; j++) {
+                if (changed[i][j] > 0) {
+                    if (countNeighbors(i, j) < 2) {
+                        changed[i][j] = 0;
+                    }
+                    if (countNeighbors(i, j) < 3) {
+                        changed[i][j] = 0;
+                    }
+                }
+                if (changed[i][j] = 0) {
+                    if (countNeighbors(i, j) == 3) {
+                        changed[i][j]++; 
+                    }
                 }
             }
         }
-        //print();
+        board = changed; 
+        print();
         // Update the game board, store a 1 if the cell is alive and a 0 otherwise.
     }
 
@@ -50,9 +59,9 @@ public class GameOfLife implements Board {
         int count = 0;
         // count the number of neighbors the cell has
         // use the get(x,y) method to read any board state you need.
-        for (int i = y - 1; i < y + 3; i++) {
-            for (int j = x - 1; j < x + 3; j++) {
-                if (x != j && y != i && board[i][j] < 0) {
+        for (int i = x - 1; i < x + 3; i++) {
+            for (int j = y - 1; j < y + 3; j++) {
+                if (y != j && x != i && board[i][j] < 0) {
                     count++;
                 }
             }
