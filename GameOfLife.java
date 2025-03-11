@@ -31,12 +31,20 @@ public class GameOfLife implements Board {
         int [][] changer = new int[board.length][board[0].length]; 
         for (int i = 0; i < changer.length; i++) {
             for (int j = 0; j < changer[0].length; j++) {
-                    if (countNeighbors(i, j) < 2) {
-                        changer[i][j] = 0;
-                    }//MAKE WORKKKKKKKKKKK
-                    if (countNeighbors(i, j) < 3) {
+                int around = countNeighbors(i, j);
+                if (board[i][j] == 1) {
+                    if (around == 2 || around == 3) {
+                        changer[i][j] = 1; 
+                    } else {
                         changer[i][j] = 0;
                     }
+                } else {
+                    if (around == 3) {
+                        changer[i][j] = 1;
+                    } else {
+                        changer[i][j] = 0;
+                    }
+                }
                 }
             }
         board = changer; 
