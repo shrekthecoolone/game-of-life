@@ -6,11 +6,7 @@ public class GameOfLife implements Board {
     private int[][] board;
 
     public GameOfLife(int x, int y) {
-       /* for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0]; j++) {
-                board[i][j] = 
-            }
-        } */
+        board = new int[x][y];
     }
 
     // Set values on the board
@@ -31,26 +27,19 @@ public class GameOfLife implements Board {
 
     // Step the simulation forward one turn.
     public void step() { //this one
-        int [][] changed = board; 
-        for (int i = 0; i < changed.length; i++) {
-            for (int j = 0; j < changed[0].length; j++) {
-                if (changed[i][j] > 0) {
+        print();
+        int [][] changer = new int[board.length][board[0].length]; 
+        for (int i = 0; i < changer.length; i++) {
+            for (int j = 0; j < changer[0].length; j++) {
                     if (countNeighbors(i, j) < 2) {
-                        changed[i][j] = 0;
-                    }
+                        changer[i][j] = 0;
+                    }//MAKE WORKKKKKKKKKKK
                     if (countNeighbors(i, j) < 3) {
-                        changed[i][j] = 0;
-                    }
-                }
-                if (changed[i][j] = 0) {
-                    if (countNeighbors(i, j) == 3) {
-                        changed[i][j]++; 
+                        changer[i][j] = 0;
                     }
                 }
             }
-        }
-        board = changed; 
-        print();
+        board = changer; 
         // Update the game board, store a 1 if the cell is alive and a 0 otherwise.
     }
 
@@ -58,12 +47,11 @@ public class GameOfLife implements Board {
     public int countNeighbors(int x, int y) { //this one
         int count = 0;
         // count the number of neighbors the cell has
-        // use the get(x,y) method to read any board state you need.
-        for (int i = x - 1; i < x + 3; i++) {
-            for (int j = y - 1; j < y + 3; j++) {
-                if (y != j && x != i && board[i][j] < 0) {
-                    count++;
-                }
+        // use the get (x,y) method to read any board state you need.
+        for (int i = x - 1; i <= x + 1; i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
+                if (i == x && j == y) continue; // Skip the center cell
+                count += get(i, j); // Sum the values of the neighbors
             }
         }
         return count;
